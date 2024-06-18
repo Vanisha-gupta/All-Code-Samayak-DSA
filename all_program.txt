@@ -1,0 +1,1895 @@
+
+------------------------------------- # SUM OF COMPLEX NUMBER IN ONE CLASS USING NORMAL FUNCTIONS # ----------------------------------------------------------------
+
+
+#include<iostream>
+using namespace std ;
+
+class complex
+{
+    int a;
+    int b;
+	
+    public:
+	
+        void set_data(int v1,int v2)
+        {
+            a=v1;
+            b=v2;
+        }
+        void setdatabysum(complex o1,complex o2)
+        {
+           a=o1.a+o2.a;
+           b=o1.b+o2.b;
+        }
+        void get_data()
+        {
+            cout<<"Complex number is "<<a<<" + "<<b<<" i "<<endl;
+        }
+};
+
+int main()
+{
+    complex c1,c2,c3;
+    c1.set_data(1,4);
+    c1.get_data();
+
+    c2.set_data(5,6);
+    c2.get_data();
+
+    c3.setdatabysum(c1,c2);
+    c3.get_data();
+	
+   return 0;
+}
+
+
+------------------------------------------------ #  SUM OF COMPLEX NUMBER IN ONE CLASS USING FRIEND FUNCTION # -------------------------------------------------------
+
+
+#include<iostream>
+using namespace std;
+
+class complex
+{
+    int a;
+    int b;
+
+    public:
+
+        void set_data(int v1,int v2)
+        {
+            a=v1;
+            b=v2;
+        }
+		
+        friend void setdatabysum(complex o1,complex o2);
+
+        void get_data()
+        {
+            cout<<"Complex number is "<<a<<" + "<<b<<" i "<<endl;
+        }
+};
+
+        void setdatabysum(complex o1,complex o2) // DEFINATION OF FRIEND FUNCTION IS ALWAYS IN OUTSIDE THE CLASS
+        {
+            complex o3;
+            int a,b;
+           a=o1.a+o2.a;
+           b=o1.b+o2.b;
+           cout<<"complex number is "<<a<<" + "<<b<<" i "<<endl;
+        };
+
+int main()
+{
+    complex c1,c2,c3;
+    c1.set_data(1,4);
+    c1.get_data();
+
+    c2.set_data(5,6);
+    c2.get_data();
+
+    setdatabysum(c1,c2);
+   
+    //c3.get_data() YE NAHI CHALEGA KUNKI FRIEND FUNCTION KISI CLASS MAIN NAHI HAI TO KOI OBJECT ISSE CALL NAHI KAREGA
+
+   return 0;
+}
+
+
+---------------------------------------------------------------------- # STRUCTURE #---------------------------------------------------------------
+
+
+#include<iostream>
+#include<string>
+using namespace std;
+
+struct book
+{
+int book_id;
+string book_name;
+string book_author;
+}s;
+
+void printbook()
+{
+    cout<<"THE BOOK DETAILS IS AS FOLLOW :- "<<endl;
+    cout<<"BOOK NAME :- "<<s.book_name<<endl;
+    cout<<"BOOK AUTHOR NAME :- "<<s.book_author<<endl;
+    cout<<"BOOK NAME :- "<<s.book_name<<endl;
+}
+
+int main()
+{
+    s.book_id=9821;
+    s.book_name = "computer";
+    s.book_author = "Vanisha";
+	
+    printbook();
+}
+
+
+--------------------------------------------------------------------- # PARAMETRISE CONSTRUCTOR # ----------------------------------------------------------
+
+
+#include<iostream.h>
+using namespace std;
+
+class abc
+{
+    int age;
+    char name[20];
+	
+    public:
+	
+    abc(int age1,char y[20])
+    {
+        cout<<"age is :- "<<age1<<endl;
+        cout<<"name is :-"<<y<<endl;
+    }
+
+};
+
+int main()
+{
+    abc obj(12,"Vanisha gupta");
+    return 0;
+}
+
+
+------------------------------------------------------------- # DSA LAB MATRIX PROGRAMM BY MUNMUN # ---------------------------------------------------------
+
+#include<stdio.h>
+#include<conio.h>
+void main()
+{
+    int a[10][10],b[10][10],c[10][10],i,j;
+    int n;
+    printf("enter the number of element in array is n :- ");
+    scanf("%d",&n);
+    printf("enter the first matrix :- ");
+    for(i=0;i<=n;i++)
+    {
+        for(j=0;j<=i;j++)
+        {
+            scanf("%d",&a[i][j]);
+        }
+}
+printf("enter the second matrix :- ");
+{
+ for(i=0;i<=n;i++)
+ {
+     for(j=0;j<=i;j++)
+     {
+        scanf("%d",&b[i][j]);
+     }
+ }
+}
+  for(i=0;i<=n;i++)
+  {
+        for(j=0;j<=i;j++)
+        {
+           c[i][j]=a[i][j]+b[i][j];
+        }
+  }
+
+
+
+ for(i=0;i<=n;i++)
+ {
+     for(j=0;j<=i;j++)
+     {
+        printf("%d\n",c[i][j]);
+ }
+}
+}
+
+
+------------------------------------------------------------------- # COPY CONSTRUCTOR  # -------------------------------------------------------
+
+
+#include<iostream>
+using namespace std;
+
+class abc
+{
+    int x,y;
+
+    public:
+        abc(int a, int b)
+        {
+            x=a;
+            y=b;
+        }
+        abc(abc &obj)
+        {
+            x=obj.x;
+            y=obj.y;
+        }
+        void display()
+        {
+            cout<<"the value of x is "<<x<<" and y is "<<y<<endl<<endl;
+        }
+
+};
+
+int main()
+{
+    abc o1(12,13);
+    o1.display();
+
+    abc o2(o1);
+    o2.display();
+
+    return 0;
+}
+
+
+------------------------------------------------ # MAKING A NORMAL FUNCTION TO FRIEND FUNCTION OF ANOTHER CLASS  # -----------------------------------------------------
+
+
+#include<iostream>
+using namespace std;
+
+//FORWARD DECLARATION
+class complex;
+
+class calculator
+{
+public:
+    int add(int a, int b)
+    {
+        return a+b;
+    }
+
+    int sumrealcomplex(complex, complex);
+
+};
+
+class complex
+{
+    int a,b;
+
+    friend int calculator :: sumrealcomplex(complex,complex);
+
+public:
+    void setnum(int n1,int n2)
+    {
+        a=n1;
+        b=n2;
+    }
+    void print()
+    {
+        cout<<"your number is "<<a<<" + "<<b<<" i "<<endl;
+    }
+};
+
+int calculator :: sumrealcomplex(complex a1,complex a2)
+{
+    return (a1.a +a2.a);
+}
+
+int main()
+{
+    complex o1,o2;
+    o1.setnum(1,4);
+    o1.print();
+
+    o2.setnum(5,6);
+    o2.print();
+
+    calculator calc;
+    int result = calc.sumrealcomplex(o1,o2);
+
+    cout<<"sum of real part is :- "<<result<<endl;
+
+    return 0;
+
+}
+
+
+-
+------------------------------------------------------------------------ # FRIEND CLASS # ---------------------------------------------------------------
+
+#include<iostream>
+using namespace std;
+
+//FORWARD DECLARATION
+class complex;
+
+class calculator
+{
+public:
+    int add(int a, int b)
+    {
+        return a+b;
+    }
+
+    int sumrealcomplex(complex, complex);
+
+};
+
+class complex
+{
+    int a,b;
+
+    friend class calculator ; //FRIEND CLASS
+	
+public:
+    void setnum(int n1,int n2)
+    {
+        a=n1;
+        b=n2;
+    }
+    void print()
+    {
+        cout<<"your number is "<<a<<" + "<<b<<" i "<<endl;
+    }
+};
+
+int calculator :: sumrealcomplex(complex a1,complex a2)
+{
+    return (a1.a +a2.a);
+}
+
+int main()
+{
+    complex o1,o2;
+    o1.setnum(1,4);
+    o1.print();
+
+    o2.setnum(5,6);
+    o2.print();
+
+    calculator calc;
+    int result = calc.sumrealcomplex(o1,o2);
+
+    cout<<"sum of real part is :- "<<result<<endl;
+
+    return 0;
+
+}
+
+
+----------------------------------------------------- # sum and avg of array element   #---------------------------------------------------------------------
+
+
+#include<iostream>
+using namespace std;
+
+class sum_avg
+{
+	public:
+	
+	
+	
+	void sum()
+	{
+		int n,i;
+			cout<<"enter the size of a array :- "<<endl;
+	 		cin>>n;
+			int arr[n] ;
+			for(i=0;i<n;i++)
+		{
+		cout<<"enter the element of array :- "<<endl;
+		cin>>arr[i];
+	}
+		
+		int sum =0;
+		for(i=0;i<n;i++)
+		{
+			sum+=arr[i];
+		}
+		cout<<"sum is :- "<<sum<<endl;
+	}
+	
+	void avg()
+	{
+		
+		int avg,i,n,sum =0;
+		cout<<"enter the size of a array"<<endl;
+	 		cin>>n;
+			int arr[n] ;
+			for(i=0;i<n;i++)
+		{
+		cout<<"enter the element of array :- "<<endl;
+		cin>>arr[i];
+	}
+		
+		for(i=0;i<n;i++)
+		{
+			sum+=arr[i];
+		}
+		avg=sum/n;
+		cout<<"average is :- "<<avg<<endl;
+	}
+};
+
+int main()
+{
+	sum_avg a;
+	a.sum();
+	a.avg();
+}
+
+
+
+------------------------------------------------------------------------- #  SQUARE OF SUM  #-------------------------------------------------------------------
+
+#include<iostream>
+using namespace std;
+
+class square
+{
+	public:
+		
+	void sum()
+	{
+	int n,i;
+			cout<<"enter the size of a array :- ";
+	 		cin>>n;
+			int arr[n] ;
+			for(i=0;i<n;i++)
+		     {
+				cout<<"enter the element of array :- "<<endl;
+				cin>>arr[i];
+		   	}
+		   	
+		int sum =0;
+		for(i=0;i<n;i++)
+		{
+			sum+=arr[i]*arr[i];
+		}
+		cout<<"sum of square is :- "<<sum;
+	}
+};
+
+int main()
+{
+	square s;
+	s.sum();
+}
+
+------------------------------------------------------------------- # SUM OF CUBE # -----------------------------------------------------------------------
+
+
+#include<iostream>
+using namespace std;
+
+class square
+{
+	public:
+		
+	void sum()
+	{
+	int n,i;
+			cout<<"enter the size of a array :- ";
+	 		cin>>n;
+			int arr[n] ;
+			for(i=0;i<n;i++)
+		     {
+				cout<<"enter the element of array :- "<<endl;
+				cin>>arr[i];
+		   	}
+		   	
+		int sum =0;
+		for(i=0;i<n;i++)
+		{
+			sum+=arr[i]*arr[i]*arr[i];
+		}
+		cout<<"sum of cube is :- "<<sum;
+	}
+};
+
+int main()
+{
+	square s;
+	s.sum();
+}
+
+------------------------------------------------------------------------ # PRIME # ---------------------------------------------------------------------------
+
+#include<iostream>
+using namespace std;
+
+class p
+{
+	int i,num,count=0;
+	public:
+		prime()
+		   {
+		   	 cout<<"Enter number ";
+		   	 cin>>num;
+		   	 for(i=2;i<=num;i++)
+		   	    {
+		   	    	if(num%i==0)
+		   	    	{
+		   	    		count ++;
+		   	    	}
+		   	    }
+			  if(count == 1)
+			  {
+		   	    cout<<"prime";	
+		   	  }
+			  else 
+				cout<<"not prime";
+				
+				
+			}	
+
+	
+};
+
+int main()
+{
+	p obj;
+	obj.prime();
+	return 0;
+}
+
+-------------------------------------------------------------------------- # MIN - MAX  # --------------------------------------------------------------------
+
+
+#include<iostream>
+using namespace std;
+
+class m
+{
+	public:
+		min()
+		{
+			int n,i,a[n];
+			cout<<"enter the size of an array :- "<<endl;
+			cin>>n;
+			for(i=0;i<n;i++)
+			{
+				cout<<"enter element :- "<<endl;
+				cin>>a[i];
+			}
+			int min=a[0];
+			for(i=0;i<n;i++)
+			{
+				if(a[i]<min)
+				{
+					min=a[i];
+				}
+			}
+			cout<<"Minimun is :- "<<min<<endl;	
+		}
+		
+		
+		max()
+		{
+			int n,i,a[n];
+			cout<<"enter the size of an array :- "<<endl;
+			cin>>n;
+			for(i=0;i<n;i++)
+			{
+				cout<<"enter element :- "<<endl;
+				cin>>a[i];
+			}
+			int max=a[0];
+			for(i=0;i<n;i++)
+			{
+				if(a[i]>max)
+				{
+					max=a[i];
+				}
+			}
+			cout<<"Maximun is :- "<<max;	
+		}
+
+	
+};
+
+int main()
+{
+	m m1;
+	m1.min();
+	m1.max();
+}
+
+--------------------------------------------------------------------------# UPSHIFT - DOWNSHIFT #--------------------------------------------------------------------------
+
+
+#include<iostream>
+using namespace std;
+
+class shift
+{
+	public:
+		upshift()
+		{
+			int n,i,a[n];
+			cout<<"enter the size of an array :- "<<endl;
+			cin>>n;
+			for(i=0;i<n;i++)
+			{
+				cout<<"enter element :- "<<endl;
+				cin>>a[i];
+			}
+			for(i=0;i<n;i++)
+			{
+				a[i]=a[i+1];
+			}
+			for(i=0;i<n-1;i++)
+			{
+				cout<<"element is :-"<<a[i]<<endl;
+			}
+		}
+		
+		downshift()
+		{
+			int n,i,a[n];
+			cout<<"enter the size of an array :- "<<endl;
+			cin>>n;
+			for(i=n;i>1;i--)
+			{
+				cout<<"enter element :- "<<endl;
+				cin>>a[i];
+			}
+			for(i=0;i<n;i++)
+			{
+				a[i+1]=a[i+1];
+			}
+			for(i=0;i<n-1;i++)
+			{
+				cout<<"element is :-"<<a[i]<<endl;
+			}
+			
+		}
+};
+
+int main()
+{
+	shift s;
+	s.upshift();
+	s.downshift();
+	return 0;
+}
+
+------------------------------------------------------------------------- # SEARCHING OF NUMBER # ---------------------------------------------------------
+
+#include<iostream>
+using namespace std;
+
+class search
+{
+	public:
+		searching()
+		{
+			int n,i,a[n],num;
+			cout<<"enter the size of an array :- "<<endl;
+			cin>>n;
+			for(i=0;i<n;i++)
+			{
+				cout<<"enter element :- "<<endl;
+				cin>>a[i];
+			}
+			
+			cout<<"enter number for searching :- "<<endl;
+			cin>>num;
+			
+			for(i=0;i<n;i++)
+			{
+				if(a[i]==num)
+				{
+					cout<<"position of number is :- "<<i+1;
+				}
+			}
+		}
+			
+			
+};
+
+int main()
+{
+	search s;
+	s.searching();
+}
+
+------------------------------------------------------------------------ # FREQUENCY OF A NUMBER # ----------------------------------------------------------
+
+#include<iostream>
+using namespace std;
+
+class freq
+{
+	public:
+		frequency()
+		{
+			int n,j,i,a[n],count=1,num;
+			cout<<"enter the size of an array :- "<<endl;
+			cin>>n;
+			for(i=0;i<n;i++)
+			{
+				cout<<"enter element :- "<<endl;
+				cin>>a[i];
+			}
+			
+			for(i=0;i<n;i++)
+			{
+				num=a[i];
+				if(num=a[i+1])
+				{
+					count++;
+					i++;
+					cout<<"repetion "<<num<<" is :-  "<<count<<endl;
+				}
+			}
+		}
+};
+
+int main()
+{
+	freq f;
+	f.frequency();
+	
+}
+
+---------------------------------------------------------------- # LINK LIST CREATION AND DISPLAY # ---------------------------------------------------
+
+
+#include<iostream>
+#include<string>
+using namespace std;
+
+class link_list
+{
+	struct node
+	{
+		int data;
+		node *next;
+	}*start,*temp,*save ;
+	
+	public:
+		
+		creation()
+		{
+			string choice;
+			if(start==NULL)
+			{
+			start=(struct node*)malloc(sizeof(struct node));
+			cout<<"Enter Data :- "<<endl;
+			cin>>start->data;
+			start->next==NULL;
+			save=start;
+			}
+			
+			do
+			{
+				cout<<"Do you want to continue yes or no :- ";
+				cin>>choice;
+				temp=(struct node*)malloc(sizeof(struct node));
+				cout<<"enter data :- ";
+				cin>>temp->data;
+				save->next=temp;
+				
+			}
+			while(choice==yes);
+			
+		}
+		
+		display()
+		{
+			while(start->next !=NULL)
+			{
+				cout<<"data is :- "<<start->data;
+				next++;
+			}
+			
+		}
+	
+};
+
+int main()
+{
+	link_list l;
+	l.creation();
+	l.display();
+	return 0;
+}
+
+-------------------------------------------------------------------- # SUM OF 2D ARRAY # ----------------------------------------------------------
+
+#include<iostream>
+using namespace std;
+
+class array
+{
+	public :
+
+	sum()
+	{
+	int i,j,r,c,add=0;
+	int a[r][c];
+	cout<<"enter number of rows :- ";
+	cin>>r;
+	cout<<"enter number of column :- ";
+	cin>>c;
+	for(i=0;i<r;i++)
+	{
+		for(j=0;j<c;j++)
+		{
+			cout<<"enter element :- "<<endl;
+			cin>>a[i][j];
+		}
+}
+	
+	for(i=0;i<r;i++)
+	{
+		for(j=0;j<c;j++)
+		{
+		
+			add=add+[i] [j];
+		}
+	}
+	cout<<"sum is :- "<<add
+   }  
+	
+};
+
+int main()
+{
+	array s;
+	s.sum();
+	return 0;
+}	
+
+------------------------------------------------------------------- # sum of square of 2d array # ------------------------------------------------------------
+
+#include<iostream>
+using namespace std;
+
+class square
+{
+	public:
+		
+	void sum()
+	{
+	int n,i,j;
+			cout<<"enter the size of a array :- ";
+	 		cin>>n;
+			int arr[n][n] ;
+			for(i=0;i<n;i++)
+		     {
+		     	for(j=0;j<n;j++)
+		     	{
+				cout<<"enter the element of array :- "<<endl;
+				cin>>arr[i][j];
+			   }
+		   	}
+		   	
+		int sum =0;
+		for(i=0;i<n;i++)
+		{
+			for(j=0;j<n;j++)
+			{
+			sum+=arr[i][j]*arr[i][j];
+		    }
+		}
+		cout<<"sum of square is :- "<<sum;
+	}
+};
+
+int main()
+{
+	square s;
+	s.sum();
+}
+
+------------------------------------------------------------------- # sum of cube of 2d array # ---------------------------------------------------------------	
+
+#include<iostream>
+using namespace std;
+
+class square
+{
+	public:
+		
+	void sum()
+	{
+	int n,i,j;
+			cout<<"enter the size of a array :- ";
+	 		cin>>n;
+			int arr[n][n] ;
+			for(i=0;i<n;i++)
+		     {
+		     	for(j=0;j<n;j++)
+		     	{
+				cout<<"enter the element of array :- "<<endl;
+				cin>>arr[i][j];
+			   }
+		   	}
+		   	
+		int sum =0;
+		for(i=0;i<n;i++)
+		{
+			for(j=0;j<n;j++)
+			{
+			sum+=arr[i][j]*arr[i][j]*arr[i][j];
+		    }
+		}
+		cout<<"sum of square is :- "<<sum;
+	}
+};
+
+int main()
+{
+	square s;
+	s.sum();
+}
+
+
+------------------------------------------------------------------ # MIN - MAX # ---------------------------------------------------------------
+
+#include<iostream>
+using namespace std;
+
+class m
+{
+	public:
+		min()
+		{
+			int n,i,j,a[n][n];
+			cout<<"enter the size of an array :- "<<endl;
+			cin>>n;
+			for(i=0;i<n;i++)
+			{
+				for(j=0;j<n;j++)
+				{
+				cout<<"enter element :- "<<endl;
+				cin>>a[i][j];
+				}
+			}
+			int min=a[0][0];
+			
+			for(i=0;i<n;i++)
+			{
+				for(j=0;j<n;j++)
+				{
+			
+				if(a[i][j]<min)
+				{
+					min=a[i][j];
+				}
+				}
+			}
+			
+			cout<<"Minimun is :- "<<min<<endl;	
+		}
+		
+		
+		max()
+		{
+			int n,i,j,a[n][n];
+			cout<<"enter the size of an array :- "<<endl;
+			cin>>n;
+			for(i=0;i<n;i++)
+			{
+				for(j=0;j<n;j++)
+				{
+				cout<<"enter element :- "<<endl;
+				cin>>a[i][j];
+				}
+			}
+			int max=a[0][0];
+			for(i=0;i<n;i++)
+			{
+				for(j=0;j<n;j++)
+				{
+			
+				if(a[i][j]>max)
+				{
+					max=a[i][j];
+				}
+				}
+			}
+			cout<<"Maximun is :- "<<max;	
+		}
+
+	
+};
+
+int main()
+{
+	m m1;
+	m1.min();
+	m1.max();
+}
+
+--------------------------------------------------------------------- # UPSHIFT - DOWNSHIFT # ------------------------------------------------------------
+
+
+
+
+
+
+------------------------------------------------------------------------ # DIAGNOL SUM # ------------------------------------------------------------------
+
+
+#include<iostream>
+using namespace std ;
+
+class sum {
+	public:
+		void diag()
+		{
+			int n,a[n][n],i,j,sum=0;
+			cout<<"enter size :- ";
+			cin>>n;
+			
+			for(i=0;i<n;i++)
+			{
+				for(j=0;j<n;j++)
+				{
+					cout<<"enter elment :- ";
+					cin>>a[i][j];
+				}
+			}
+			
+			for(i=0;i<n;i++)
+			{
+				for(j=0;j<n;j++)
+				{
+					if(i==j)
+					{
+						//int sum=0;
+						sum=sum+a[i][j];
+					}
+				}
+			}
+			cout<<"sum is "<<sum;
+			
+		}
+};
+
+int main()
+{
+	sum s;
+	s.diag();
+}
+
+
+-------------------------------------------------------------------
+
+
+#include<iostream>
+#include<stdlib.h>
+using namespace std;
+class comp{
+	public:
+struct node
+{
+	int data;
+	
+	
+	struct node *next;
+}*start;
+	void create(int num)
+	{
+		struct node *q,*t,*start;
+		if(start==NULL)
+		{
+			start = (struct node*)malloc(sizeof(struct node));
+			start ->data = num;
+			start -> next = NULL;
+			
+		}
+		else 
+		{
+			q=start;
+			while(q->next != NULL)
+			{
+				q=q->next;	
+			}
+			t=(struct node*)malloc(sizeof(struct node));
+			t->data=num;
+			t->next=NULL;
+			q->next=t;
+		}
+	}
+	void display()
+	{
+		struct node *q,*start;
+		if(start==NULL)
+		{
+			printf("list is empty");
+			return;
+		}
+		printf("\n item in list \n");
+		for(q=start;q!=NULL;q=q->next)
+		printf("%d\t",q->data);
+	}
+			
+};
+
+int main()
+{
+	comp l;
+	int num,i,choice,pos,*start;
+	start = NULL;
+	do
+	{
+		cout<<" ENTER 1 FOR CREATE :- \n";
+		cout<<" ENTER 2 FOR DISPLAY :- \n";
+		cout<<" ENTER 3 FOR EXIT :- \n";
+		cin>>choice;
+		switch(choice)
+		{
+			case 1 :cout<<"enter item to add in list ";
+			cin>>num;
+			l.create(num);
+			break;
+			
+			case 2 : l.display();
+			break;
+			
+			default:cout<<"wrong choice ...... enter correct choice ";
+		}
+	}while(1);
+	return 0;
+	
+}
+
+
+----------------------------------------------------------------------------------------------------
+
+
+#include<iostream.h>
+#include<stdlib.h>
+struct node
+{
+	int data;
+	
+	
+	struct node *next;
+}*start;
+	void create(int num)
+	{
+		struct node *q,*t,*start;
+		if(start==NULL)
+		{
+			start = (struct node*)malloc(sizeof(struct node));
+			start ->data = num;
+			start -> next = NULL;
+			
+		}
+		else 
+		{
+			q=start;
+			while(q->next != NULL)
+			{
+				q=q->next;	
+			}
+			t=(struct node*)malloc(sizeof(struct node));
+			t->data=num;
+			t->next=NULL;
+			q->next=t;
+		}
+	}
+	void display()
+	{
+		struct node *q,*start;
+		if(start==NULL)
+		{
+			printf("list is empty");
+			return;
+		}
+		printf("\n item in list \n");
+		for(q=start;q!=NULL;q=q->next)
+		printf("%d\t",q->data);
+	}
+			
+
+int main()
+{
+
+	int num,i,choice,pos,*start;
+	start = NULL;
+	do
+	{
+		printf(" ENTER 1 FOR CREATE :- \n");
+		printf(" ENTER 2 FOR DISPLAY :- \n");
+		printf(" ENTER 3 FOR EXIT :- \n");
+		scanf("%d",&choice);
+		switch(choice)
+		{
+			case 1 :printf("enter item to add in list ");
+			scanf("%d",&num);
+			create(num);
+			break;
+			
+			case 2 : display();
+			break;
+			
+			default:printf("wrong choice ...... enter correct choice ";
+		}
+	}while(1);
+	return 0;
+	
+};
+
+
+
+
+
+-------------------------------------------------------------------------------------------------------------------------------------------------
+------------------------------------- # LINK LIST PROGRAMM BY MAM #-----------------------------------------------------
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+#include<iostream>
+#include<stdlib.h>
+#define Null 0
+using namespace std ;
+
+struct node
+{
+	int data;
+	struct node * next;	
+} *start ;
+
+void create(int num);
+void display();
+void count();
+/*
+void addbeginning(int num);
+void addafter(int pos,int num);
+void search(int num);
+void reverse();
+void sort();
+*/
+
+int main()
+{ 
+	int num,choice,pos,i;
+	
+	
+	do
+	{
+		cout<<"\nenter 1 to create a list";
+		cout<<"\nenter 2 to display ";
+		cout<<"\n enter 3 to count the node ";
+		/*
+		printf("\n enter 4 to add node at beginning");
+		printf("\n enter 5 to add node at given position");
+		printf("\n enter 6 to search the node");
+		printf("\n enter 7 to reverse the list");
+		printf("\n enter 8 to sort the array");
+		*/
+		
+	cin>>choice;
+	switch(choice)
+	{
+		case 1:cout<<"\nenter item in list";
+		cin>>num;
+		create(num);
+		break;
+		
+		case 2:display();
+		break;
+		
+		case 3:count();
+		break;
+		
+		/*
+		case 4:printf("\n enter the element in add node");
+		       scanf("%d",&num);
+		       addbeginning(num);
+		       break;
+		       
+		
+		case 5:   printf("\n enter the position to add the node");
+                   scanf("%d",&pos);
+                   printf("\n enter the element in add node");
+		           scanf("%d",&num);
+		           addafter(pos,num);
+				   	break;
+				   	
+		case 6: printf("enter the node to be search ");
+		        scanf("%d",&num);
+				search(num);
+				break;
+		case 7: reverse();
+		         break;	
+		case 8: sort();
+				 break;			
+				 */	   	      
+		default:cout<<"\nwrong choice";
+		
+		
+	}
+	
+	}  while(1);
+    
+}
+void create(int num)
+{
+	struct node *q , *t;
+	if(start == Null)
+	{
+		start=(struct node*) malloc (sizeof (struct node));
+		start->data=num;
+		start->next=Null;
+	}
+	else
+	{
+		q=start;
+		while(q->next != Null)
+		{q=q->next;
+		}
+		t=(struct node*) malloc (sizeof(struct node));
+		t->data=num;
+		t->next=Null;
+		q->next=t;
+	}
+}
+
+
+void display()
+{
+	struct node *q;
+	if(start==Null)
+	{
+	cout<<"\n list is empty";
+	return;
+	}
+	
+	cout<<"\n item in list";
+	for(q=start;q != Null ;q=q->next)
+	cout<<q->data<<endl;
+	
+}
+
+void count()
+{ int n=0;
+  struct node *q;
+  for(q=start;q!=Null;q=q->next)
+  n++;
+  cout<<"\n number of nodes = "<<n;
+}
+
+/*
+void addbeginning(int num)
+{
+	struct node *q;
+	q=(struct node *) malloc (sizeof(struct node));
+	q->data=num;
+	q->next=start;
+	start=q;
+}
+
+void addafter(int pos,int num)
+{
+	struct node *q ,*t;
+	int i;
+	q=start;
+	for(i=1;i<pos;i++)
+	{q=q->next;
+	 if(q==Null)
+	  {printf("\n there are less than %d element",pos);
+	  return ;
+	  }
+}
+	  t=(struct node *) malloc (sizeof(struct node));
+	  t->data=num;
+	  t->next=q->next;
+	  q->next=t;
+	}
+
+
+void search(int num)
+{
+	struct node *q ;
+	int loc=1;
+	q=start;
+	while(q
+	!=Null)
+	{
+		if(q->data==num)
+		{printf("item %d found at position %d \n ",num,loc);
+		  return ;
+		}
+		else
+		{q=q->next;
+		 loc++;
+		}
+	}
+	printf("item %d not found in list",num);
+}
+
+void reverse()
+{
+	struct node *p1,*p2,*p3;
+	if(start==Null)
+	
+	return;
+    
+	p1=start;
+	p2=p1->next;
+	p3=p2->next;
+	p1->next=Null;
+	p2->next=p1;
+	while(p3!=Null)
+	{ p1=p2;
+	  p2=p3;
+	  p3=p3->next;
+	  p2->next=p1;
+	  
+	}
+	start=p2;
+}
+
+void sort()
+{ int temp;
+	struct node *q,*t;
+    q=start;
+    while(q!=Null)
+    {
+    	t=q->next;
+    	while(t!=Null)
+    	{if(q->data>t->data)
+    	  {temp=q->data;
+    	   q->data=t->data;
+    	   t->data=temp;
+		  }
+		t=t->next;
+		}
+		q=q->next;
+	}
+}
+*/
+
+
+
+--------------------------------------------------- # SINGLY LINK LIST PROGRAMM BY ME #----------------------------------------------
+
+#include<iostream>
+#include<stdlib.h>
+using namespace std;
+
+//Q IS SAVE AND T IS TEMP
+	
+struct node
+{
+	int data;
+	struct node *next;
+}*start;
+
+
+void create(int num);
+void display();
+void count();
+void insert_at_pos(int num);
+void insert_after_pos(int num);
+void del(int num);
+
+
+int main()
+{
+	
+	int num,i,choice;
+	struct node *start;
+	start = NULL;
+	do
+	{
+		cout<<" ENTER 1 FOR CREATE :- \n"<<endl;
+		cout<<" ENTER 2 FOR DISPLAY :- \n"<<endl;
+		cout<<" ENTER 3 FOR COUNTING THE NODE :- \n"<<endl;
+		cout<<" ENTER 4 FOR INSERT AT POSITION IN A LIST :- \n"<<endl;
+		cout<<" ENTER 5 FOR INSERT AFTER POSITION IN A LIST :- \n"<<endl;
+		cout<<" ENTER 6 FOR DELETE IN A LIST :- \n"<<endl;
+		
+		cin>>choice;
+		switch(choice)
+		{
+			case 1 :cout<<"enter item to add in list "<<endl;
+			cin>>num;
+			create(num);
+			break;
+			
+			case 2 :display();
+			break;
+			
+			case 3 :count();
+			break;
+			
+			case 4 :cout<<"enter element for insert "<<endl;
+			cin>>num;
+			insert_at_pos(num);
+			break;
+			
+			case 5 :cout<<"enter element for insert "<<endl;
+			cin>>num;
+			insert_after_pos(num);
+			break;
+			
+			case 6 :cout<<"enter element for delete "<<endl;
+			cin>>num;
+			del(num);
+			break;
+			
+			default:cout<<"wrong choice ...... enter correct choice "<<endl<<endl;
+		}
+	}while(1);
+	return 0;
+	
+}
+
+void create(int num)
+	{
+		struct node *q,*t;
+		if(start==NULL)
+		{
+			start = (struct node*)malloc(sizeof(struct node));
+			start ->data = num;
+			start -> next = NULL;
+			
+		}
+		else 
+		{
+			q=start;
+			while(q->next!= NULL)
+			{
+				q=q->next;	
+			}
+			t=(struct node*)malloc(sizeof(struct node));
+			t->data=num;
+			t->next=NULL;
+			q->next=t;
+		}	
+	}
+	void display()
+	{
+		struct node *q;
+		
+		if(start==NULL)
+		{
+			cout<<"list is empty"<<endl;
+			return;
+		}
+		cout<<"\n item in list \n"<<endl;
+		for(q=start;q!=NULL;q=q->next)
+		{
+		cout<<q->data<<endl;
+	
+	}
+	
+	
+	}
+	
+	void count()
+	 {  int n=0;
+  		struct node *q;
+  		for(q=start;q!=NULL;q=q->next)
+ 		n++;
+ 	   cout<<"no. of node is :- "<<n<<endl;  
+	}  
+
+	void insert_at_pos(int num)
+	{
+		int pos;
+		struct node *q,*t;
+		cout<<" ENTER POSITION FOR INSERT "<<endl;
+		cin>>pos;
+		q=start;
+		for(int i=1;i<pos-1;i++)
+		{
+			q=q->next;
+			if(q==NULL)
+			{
+				cout<<"there are less than"<<pos<<"element"<<endl;
+			}
+		}
+				t=(struct node*)malloc(sizeof(struct node));
+				t->data=num;
+				t->next=q->next;
+				q->next=t;
+				cout<<"enlement inserted"<<endl;	
+	}
+	
+	void insert_after_pos(int num)
+	{
+		int pos;
+		struct node *q,*t;
+		cout<<" ENTER POSITION FOR INSERT "<<endl;
+		cin>>pos;
+		q=start;
+		for(int i=1;i<pos;i++)
+		{
+			q=q->next;
+			if(q==NULL)
+			{
+				cout<<"there are less than"<<pos<<"element"<<endl;
+			}
+		}
+				t=(struct node*)malloc(sizeof(struct node));
+				t->data=num;
+				t->next=q->next;
+				q->next=t;
+				cout<<"enlement inserted"<<endl;	
+	}
+	
+	
+	void del(int num)
+	{
+		struct node *q,*t;
+		t=q=start;
+		q=q->next;
+		while(q!=NULL)
+		{
+			if(q->data == num)
+			{
+				t->next=q->next;
+				free(q);
+				cout<<"node deleted "<<endl;	
+				return;
+			}
+				t=q;
+				q=q->next;
+		cout<<"element not found "<<endl;
+	    }	
+	}
+	
+
+------------------------------------------------------- # DOUBLY LINK LIST #---------------------------------------------
+
+
+
+#include<iostream>
+#include<stdlib.h>
+using namespace std;
+
+struct node{
+	int data;
+	struct node* next;
+	struct node* prev;
+}*start;
+
+void create(int num);
+void insert_after_pos(int);
+void insert_at_pos(int);
+void del(int);
+void display();
+void count();
+
+int main()
+{
+	
+	int num,i,choice;
+	struct node *start;
+	start = NULL;
+	do
+	{
+		cout<<" ENTER 1 FOR CREATE :- \n"<<endl;
+		cout<<" ENTER 2 FOR DISPLAY :- \n"<<endl;
+		cout<<" ENTER 3 FOR COUNTING THE NODE :- \n"<<endl;
+		cout<<" ENTER 4 FOR INSERT AT POSITION IN A LIST :- \n"<<endl;
+		cout<<" ENTER 5 FOR INSERT AT IN A LIST :- \n"<<endl;
+		cout<<" ENTER 6 FOR DELETE AN NODE IN A LIST :- \n"<<endl;
+
+		cin>>choice;
+		switch(choice)
+		{
+			case 1 :cout<<"enter item to add in list :- "<<endl;
+			cin>>num;
+			create(num);
+			break;
+			
+			case 2 :display();
+			break;
+
+			case 3 :count();
+			break;
+			
+			case 4 :cout<<"enter element for insert "<<endl;
+			cin>>num;
+			insert_after_pos(num);
+			break;
+			
+			case 5 :cout<<"enter element for insert "<<endl;
+			cin>>num;
+			insert_at_pos(num);
+			break;
+			
+			case 6 :cout<<"enter element for delete "<<endl;
+			cin>>num;
+			del(num);
+			break;
+			
+			default:cout<<"wrong choice ...... enter correct choice "<<endl<<endl;
+		}
+	}while(1);
+	return 0;
+	
+}
+
+void create(int num)
+{
+	struct node *q,*t;
+	if (start==NULL)
+	{
+		start = (struct node*)malloc(sizeof(struct node));
+		start ->data = num;
+		start -> next = NULL;
+		start -> prev = NULL;	
+	}
+	
+	else
+	{
+		q=start;
+		while(q->next!= NULL )
+		{
+			q=q -> next ;
+		}
+		t=(struct node*) malloc (sizeof(struct node));
+		t->next=NULL;
+		t->data=num;
+		t->prev=q;	
+		q->next=t;
+	}
+}
+
+void display()
+	{
+		struct node *q;
+		
+		if(start==NULL)
+		{
+			cout<<"list is empty"<<endl;
+			return;
+		}
+		cout<<"\n item in list \n"<<endl;
+		for(q=start;q!=NULL;q=q->next)
+		{
+			cout<<q->data<<endl;
+		}
+	}
+	
+	void count()
+	 { 	int n=0;
+ 	 	struct node *q;
+  		for(q=start;q!=NULL;q=q->next)
+  		n++;
+ 		cout<<"no. of node is :- "<<n<<endl; 
+	 }
+
+	void insert_after_pos(int num)
+	{
+		int pos;
+		struct node *q,*t;
+		q=start;
+		cout<<" ENTER POSITION FOR INSERT "<<endl;
+		cin>>pos;
+		for(int i=1;i<pos;i++)
+		{
+			q=q->next;
+			if(q==NULL)
+			{
+				cout<<"there are less than"<<pos<<"element"<<endl;
+				return;
+			}
+		}
+				t=(struct node*)malloc(sizeof(struct node));
+				t->data=num;
+				t->next=q->next;
+				t->prev=q;
+				t->next->prev=q;
+				q->next=t;
+				cout<<"enlement inserted"<<endl;	
+	}
+
+void insert_at_pos(int num)
+	{
+		int pos;
+		struct node *q,*t;
+		q=start;
+		cout<<" ENTER POSITION FOR INSERT "<<endl;
+		cin>>pos;
+		for(int i=1;i<pos-1;i++)
+		{
+			q=q->next;
+			if(q==NULL)
+			{
+				cout<<"there are less than"<<pos<<"element"<<endl;
+				return;
+			}
+		}
+				t=(struct node*)malloc(sizeof(struct node));
+				t->data=num;
+				t->next=q->next;
+				t->prev=q;
+				t->next->prev=q;
+				q->next=t;
+				cout<<"enlement inserted"<<endl;	
+	}
+	
+	void del(int num)
+     {
+     	struct node *q,*t;
+     	t=q=start;
+     	q=q->next;
+     	while(q != NULL)
+     	{
+     		if(q->data = num)
+     		{
+     			t->next=q->next;
+     			t->prev=q;
+     			free(q);
+     			cout<<" NODE DELETED SUCCESSFULLY "<<endl;
+		    }
+			 t=q;
+			 q=q->next;
+		}	
+	 }
+	
+
+
+------------------------------------------- SHIFTING IN ARRAY -------------------------------------------------
+
+#include<iostream>
+using namespace std;
+int main()
+{
+            int n,i,j;
+			cout<<"enter the row of an array :- "<<endl;
+			cin>>n;
+			
+			int a[n][n];
+			for(i=0;i<n;i++)
+			{
+				for(j=0;j<n;j++)
+				{
+				cout<<"enter element :- "<<endl;
+				cin>>a[i][j];
+				}
+			}
+			
+			int t[n][n];
+			for(i=0;i<n;i++)
+			{
+				for(j=0;j<n;j++)
+				{
+					if(i == (n-1))
+					{
+						t[0][j]=a[i][j];
+					}
+					else
+					{
+						t[i+1][j]=a[i][j];
+					}
+				}
+			}
+		
+			for(i=0;i<n;i++)
+			{
+				for(j=0;j<n;j++)
+				{
+				cout<<"element is :-  "<<t[i][j]<<endl;
+				}
+			}
+			
+			
+			return 0;
+}
